@@ -1,0 +1,56 @@
+#my solution not the best doesnt take in overflow issues
+class Solution:
+    def reverse(self, x: int) -> int:
+        rev = ''
+        s = str(x)
+
+        for i in range(len(s)):
+            if (int(s) >= 0):
+                rev = s[::-1]
+                if (s[i] == '0'):
+                    rev = s.replace('0', '')
+                    rev = rev[::-1]
+            elif (int(s) < 0):
+                rev = s[::-1]
+                for j in range(len(rev)):
+                    if (rev[j] == '-'):
+                        rev = s.replace('-', ' ')
+                        rev = rev[::-1]
+                        rev = '-' + rev
+                        break
+            return int(rev)
+
+
+
+
+
+s = Solution()
+num = -120
+revInt = s.reverse(num)
+print(f"Reverse: {revInt}")
+
+#required solution checks overflow
+import math
+
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        MIN = -2147483648
+        MAX = 2147483647
+        res = 0
+        #ex: 123
+        while x:
+            digit = math.fmod(x,10)
+            x = int(x/10)
+            if(res > MAX // 10 or res == MAX //10 and digit >= MAX % 10):
+                return  0
+            if (res < MIN // 10 or res == MIN // 10 and digit <= MIN % 10):
+                return 0
+            res = (res * 10) + digit #ex:123 -> res = 0 * 10 + 3 = 3, res = (3*10) + digit = 32 .... -> 321
+        return int(res)
+
+
+s = Solution()
+num = 120
+revInt = s.reverse(num)
+print(f"Reverse: {revInt}")

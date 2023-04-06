@@ -1,0 +1,70 @@
+#n^3 complexity not good enough but was the way I thought of doing it
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        maxlen = 0
+        output = ''
+        for i in range(0, len(s)):
+            for j in range(i+1, len(s) + 1):
+                store = s[i:j]
+                if(store == store[::-1]) and len(store) > maxlen:
+                    output = store
+                    maxlen = len(store)
+
+
+        return output
+
+
+
+
+
+
+str = "cbbd"
+s = Solution()
+palindrome = s.longestPalindrome(str)
+print(palindrome)
+
+
+
+#n^2 complexity
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        N = len(s)
+        print(f'N: {N}')
+        def LP(l, r):
+            # print(f'L: {l} and R: {r}')
+            while r < N and l >= 0:
+                if(s[r] != s[l]):
+                    break
+                r+=1
+                l-=1
+            return l+1,r
+
+        start, end = 0,0
+        for i in range (N):
+            l,r = LP(i,i)
+            print("Odd")
+            print(f'L: {l} and R: {r}')
+
+            if(r-l) > (end - start):
+                end = r
+                start = l
+                print(f'start: {start} and end: {end}')
+
+            l, r = LP(i, i+1)
+            print("Even")
+            print(f'L: {l} and R: {r}')
+
+            if (r - l) > (end - start):
+                end = r
+                start = l
+                print(f'start: {start} and end: {end}')
+
+        return s[start:end]#ex: cbbd , everything starting from 1 all the way to 3 no inclusion at end so really stops at [1:2]
+
+
+
+
+str = "cbbd"
+s = Solution()
+palindrome = s.longestPalindrome(str)
+print(palindrome)

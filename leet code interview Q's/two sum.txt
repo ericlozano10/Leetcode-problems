@@ -1,0 +1,48 @@
+# Input: nums = [2,7,11,15], target = 9
+# Output: [0,1]
+# Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+#Brute force Solution
+#----------------------------------------------------------------
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        for i in range(0, len(nums)):
+            # print(f'i: {i}')
+            for j in range(i+1, len(nums)):
+                # print(f'j: {j}')
+                if(nums[i] + nums[j] == target):
+                    return ([i, j])
+        return []
+
+
+s = Solution()
+nums = [2,7,11,15]
+target = 30
+pos = s.twoSum(nums, target)
+print(f'arr_pos: {pos}')
+
+#Hash map solution
+#------------------------------------------------------------
+# Input: nums = [2,7,11,15], target = 9
+# Output: [0,1]
+# Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        matches = {}
+        #another way to loop through contents in array
+        for number in nums:
+            match = target - number
+            if (match in matches):
+                return [match, number]
+            else:
+                matches[number] = True
+        return []
+
+
+
+s = Solution()
+nums = [2,7,11,15]
+target = 9
+pos = s.twoSum(nums, target)
+print(f'arr_pos: {pos}')
